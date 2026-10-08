@@ -23,7 +23,6 @@ class UserController extends Controller
             'title' => 'List User',
             'users' => $this->userModel->getUser(),
         ];
-
         return view('list_user', $data);
     }
 
@@ -35,7 +34,6 @@ class UserController extends Controller
             'title' => 'Create User',
             'kelas' => $kelas,
         ];
-
         return view('create_user', $data);
     }
 

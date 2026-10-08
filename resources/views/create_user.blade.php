@@ -28,6 +28,7 @@
                 <option value="{{ $kelasItem->id }}">{{ $kelasItem->nama_kelas }}</option>
 
             @endforeach
+            
         </select><br><br>
 
 

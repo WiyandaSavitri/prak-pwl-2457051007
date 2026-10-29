@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
     <div class="container">
-        <a class="navbar-brand" href="{{ route('user.index') }}">Praktikum PWL</a>
+        <a class="navbar-brand fw-semibold" href="{{ route('user.index') }}">Praktikum PWL</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
             <span class="navbar-toggler-icon"></span>
         </button>

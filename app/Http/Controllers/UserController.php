@@ -23,6 +23,7 @@ class UserController extends Controller
             'title' => 'List User',
             'users' => $this->userModel->getUser(),
         ];
+
         return view('list_user', $data);
     }
 
@@ -34,6 +35,7 @@ class UserController extends Controller
             'title' => 'Create User',
             'kelas' => $kelas,
         ];
+
         return view('create_user', $data);
     }
 
@@ -45,6 +47,47 @@ class UserController extends Controller
             'kelas_id' => $request->input('kelas_id'),
         ]);
 
-        return redirect()->to('/user');
+        return redirect()->to('/user')->with('success', 'Data user berhasil ditambahkan!');
+    }
+
+    public function edit($id)
+    {
+        $user = UserModel::findOrFail($id);
+
+        return view('edit_user', [
+            'title' => 'Edit User',
+            'user' => $user,
+            'kelas' => $this->kelasModel->getKelas(),
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nama' => 'required|max:255',
+            'npm' => 'required|max:20',
+            'kelas_id' => 'required|exists:kelas,id',
+        ]);
+
+        $user = UserModel::findOrFail($id);
+        $user->update([
+            'nama' => $request->input('nama'),
+            'nim' => $request->input('npm'),
+            'kelas_id' => $request->input('kelas_id'),
+        ]);
+
+        return redirect()->to('/user')->with('success', 'Data user berhasil diperbarui!');
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $user = UserModel::findOrFail($id);
+            $user->delete();
+
+            return redirect()->to('/user')->with('success', 'Data user berhasil dihapus!');
+        } catch (\Exception $e) {
+            return redirect()->to('/user')->with('error', 'Gagal menghapus data user.');
+        }
     }
 }
